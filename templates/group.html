@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}Group{% endblock %}
 {% block content %}
-    <h1>Group: {{ group.name }}</h1>
-    <h2>Group Code: {{ group.code }}</h2>
+<h1>Group: {{ group.name }}</h1>
+<h2>Group Code: {{ group.code }}</h2>
 
-    <h3>Common Availabilities</h3>
-    {% if message %}
-        <p>{{ message }}</p>
-    {% elif common %}
-        <ul>
-        {% for avail in common %}
-            <li>{{ avail.start.strftime('%Y-%m-%d %H:%M') }} to {{ avail.end.strftime('%Y-%m-%d %H:%M') }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No availabilities yet.</p>
-    {% endif %}
+<h3>Common Availabilities</h3>
+{% if message %}
+    <p>{{ message }}</p>
+{% elif common %}
+    <ul>
+    {% for avail in common %}
+        <li>{{ avail.start.strftime('%Y-%m-%d %H:%M') }} to {{ avail.end.strftime('%Y-%m-%d %H:%M') }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No availabilities yet.</p>
+{% endif %}
 
-    <a href="{{ url_for('update_group', code=group.code) }}"><button>Update Availability</button></a>
+<a href="{{ url_for('update_group', code=group.code) }}"><button>Update Availability</button></a>
 
-    <br><br>
-    <a href="{{ url_for('dashboard') }}">Return to Dashboard</a>
+<br><br>
+<a href="{{ url_for('dashboard') }}">Return to Dashboard</a>
 {% endblock %}
