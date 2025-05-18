@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Create Group{% endblock %}
+{% block content %}
+<h2>Create a New Group</h2>
+<form method="post">
+    <label>Group Name:</label>
+    <input type="text" name="group_name" required>
+    <br>
+    <button type="submit">Confirm</button>
+    <a href="{{ url_for('dashboard') }}"><button type="button">Cancel</button></a>
+</form>
+{% endblock %}
