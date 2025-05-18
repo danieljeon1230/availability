@@ -125,3 +125,8 @@ def update_group(code):
         return redirect(url_for('view_group', code=code))
     user_avails = Availability.query.filter_by(user_id=user.id, group_id=group.id).all()
     return render_template('update_availability.html', group=group, availabilities=user_avails)
+    
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
