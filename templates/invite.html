@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Invite Your Friends{% endblock %}
+{% block content %}
+<h2>Invite Your Friends!</h2>
+<p>Your group's access code is: <strong>{{ code }}</strong></p>
+<p>An email has been sent to you with this code.</p>
+<a href="{{ url_for('dashboard') }}"><button>Return to Dashboard</button></a>
+{% endblock %}
