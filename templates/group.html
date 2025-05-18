@@ -9,7 +9,7 @@
     <p>{{ message }}</p>
 {% elif common %}
     <ul>
-    {% for avail in common %}
+    {% for start, end in common %}
         <li>{{ avail.start.strftime('%Y-%m-%d %H:%M') }} to {{ avail.end.strftime('%Y-%m-%d %H:%M') }}</li>
     {% endfor %}
     </ul>
