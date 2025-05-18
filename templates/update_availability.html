@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Update Availability for {{ group.name }}{% endblock %}
+{% block content %}
+<h2>Update Availability for {{ group.name }}</h2>
+<form method="post" id="availability-form">
+    <div id="availability-fields">
+        {% for avail in availabilities %}
+            <div class="availability-entry">
+                <label>Start:</label>
+                <input type="datetime-local" name="start" value="{{ avail.start.strftime('%Y-%m-%dT%H:%M') }}" required>
+                <label>End:</label>
+                <input type="datetime-local" name="end" value="{{ avail.end.strftime('%Y-%m-%dT%H:%M') }}" required>
+                <button type="button" onclick="removeAvailability(this)">Remove</button>
+            </div>
+        {% endfor %}
+    </div>
+    <button type="button" onclick="addAvailability()">Add Availability</button>
+    <br><br>
+    <button type="submit">Save Changes</button>
+    <a href="{{ url_for('view_group', code=group.code) }}"><button type="button">Cancel</button></a>
+</form>
+
+<script>
+function addAvailability() {
+    const container = document.getElementById('availability-fields');
+    const entry = document.createElement('div');
+    entry.className = 'availability-entry';
+    entry.innerHTML = `
+        <label>Start:</label>
+        <input type="datetime-local" name="start" required>
+        <label>End:</label>
+        <input type="datetime-local" name="end" required>
+        <button type="button" onclick="removeAvailability(this)">Remove</button>
+    `;
+    container.appendChild(entry);
+}
+
+function removeAvailability(button) {
+    button.parentElement.remove();
+}
+</script>
+{% endblock %}
