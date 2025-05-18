@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="datetime-local"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button.cancel {
+    background-color: #e74c3c;
+}
+
+button.cancel:hover {
+    background-color: #c0392b;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px 12px;
+    background-color: #ecf0f1;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.availability-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.availability-entry input {
+    width: 45%;
+}
+
+.message {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.message.success {
+    color: green;
+}
+
+.message.error {
+    color: red;
+}
+
+.group-list {
+    margin-top: 20px;
+}
+
+.group-list a {
+    display: block;
+    padding: 12px;
+    background: #dfe6e9;
+    color: #2d3436;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: background 0.2s ease;
+}
+
+.group-list a:hover {
+    background: #b2bec3;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.invite-code {
+    text-align: center;
+    font-size: 24px;
+    background-color: #dff9fb;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed #3498db;
+    color: #130f40;
+    font-weight: bold;
+}
