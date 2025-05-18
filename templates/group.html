@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ group.name }} - Group</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Group{% endblock %}
+{% block content %}
     <h1>Group: {{ group.name }}</h1>
     <h2>Group Code: {{ group.code }}</h2>
 
@@ -25,5 +21,4 @@
 
     <br><br>
     <a href="{{ url_for('dashboard') }}">Return to Dashboard</a>
-</body>
-</html>
+{% end block content %}
