@@ -155,21 +155,39 @@ def view_group(code):
         message=None if common else "No common availabilities found."
     )
 
+from flask import flash
+
 @app.route('/group/<code>/update', methods=['GET', 'POST'])
 def update_group(code):
     group = Group.query.filter_by(code=code).first_or_404()
     user = User.query.get(session['user_id'])
+
     if request.method == 'POST':
-        Availability.query.filter_by(user_id=user.id, group_id=group.id).delete()
         starts = request.form.getlist('start')
         ends = request.form.getlist('end')
+        bad_pair = False
+
+        availabilities = []
         for s, e in zip(starts, ends):
             start = datetime.strptime(s, '%Y-%m-%dT%H:%M')
             end = datetime.strptime(e, '%Y-%m-%dT%H:%M')
-            a = Availability(user_id=user.id, group_id=group.id, start=start, end=end)
+            if start >= end:
+                bad_pair = True
+                break
+            availabilities.append(Availability(user_id=user.id, group_id=group.id, start=start, end=end))
+
+        if bad_pair:
+            user_avails = Availability.query.filter_by(user_id=user.id, group_id=group.id).all()
+            error_message = "Each start day and time must be before the corresponding end day and time"
+            return render_template('update_availability.html', group=group, availabilities=user_avails, error=error_message)
+
+        # Clear old and add new
+        Availability.query.filter_by(user_id=user.id, group_id=group.id).delete()
+        for a in availabilities:
             db.session.add(a)
         db.session.commit()
         return redirect(url_for('view_group', code=code))
+
     user_avails = Availability.query.filter_by(user_id=user.id, group_id=group.id).all()
     return render_template('update_availability.html', group=group, availabilities=user_avails)
     
