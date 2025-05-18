@@ -54,9 +54,15 @@ def logout():
 
 @app.route('/dashboard')
 def dashboard():
-    user = User.query.get(session['user_id'])
-    groups = [m.group for m in user.memberships]
-    return render_template('dashboard.html', groups=groups, email=user.email)
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    memberships = Membership.query.filter_by(user_id=user_id).all()
+    group_ids = [m.group_id for m in memberships]
+    user_groups = Group.query.filter(Group.id.in_(group_ids)).all()
+
+    return render_template('dashboard.html', user_groups=user_groups)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create_group():
