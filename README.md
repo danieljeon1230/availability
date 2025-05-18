@@ -1,2 +1,2 @@
 # availability
-Calendar Availability Matching Website
+Availability Matching Website
