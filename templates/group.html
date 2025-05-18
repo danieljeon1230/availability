@@ -21,9 +21,7 @@
         <p>No availabilities yet.</p>
     {% endif %}
 
-    <a href="{{ url_for('update_availability') }}">
-        <button>Update Availability</button>
-    </a>
+    <a href="{{ url_for('update_group', code=group.code) }}"><button>Update Availability</button></a>
 
     <br><br>
     <a href="{{ url_for('dashboard') }}">Return to Dashboard</a>
