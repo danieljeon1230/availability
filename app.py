@@ -154,8 +154,6 @@ def view_group(code):
         common=common,
         message=None if common else "No common availabilities found."
     )
-    
-from flask import flash  # make sure this import is at the top of your file
 
 @app.route('/group/<code>/update', methods=['GET', 'POST'])
 def update_group(code):
@@ -181,7 +179,6 @@ def update_group(code):
                 new_availabilities.append(a)
 
         if invalid_times:
-            flash("Each start time must be before the corresponding end time.", "error")
             user_avails = Availability.query.filter_by(user_id=user.id, group_id=group.id).all()
             return render_template('update_availability.html', group=group, availabilities=user_avails)
 
