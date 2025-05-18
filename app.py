@@ -159,34 +159,17 @@ def view_group(code):
 def update_group(code):
     group = Group.query.filter_by(code=code).first_or_404()
     user = User.query.get(session['user_id'])
-
     if request.method == 'POST':
         Availability.query.filter_by(user_id=user.id, group_id=group.id).delete()
         starts = request.form.getlist('start')
         ends = request.form.getlist('end')
-
-        invalid_times = []
-        new_availabilities = []
-
         for s, e in zip(starts, ends):
             start = datetime.strptime(s, '%Y-%m-%dT%H:%M')
             end = datetime.strptime(e, '%Y-%m-%dT%H:%M')
-
-            if start >= end:
-                invalid_times.append((s, e))
-            else:
-                a = Availability(user_id=user.id, group_id=group.id, start=start, end=end)
-                new_availabilities.append(a)
-
-        if invalid_times:
-            user_avails = Availability.query.filter_by(user_id=user.id, group_id=group.id).all()
-            return render_template('update_availability.html', group=group, availabilities=user_avails)
-
-        for a in new_availabilities:
+            a = Availability(user_id=user.id, group_id=group.id, start=start, end=end)
             db.session.add(a)
         db.session.commit()
         return redirect(url_for('view_group', code=code))
-
     user_avails = Availability.query.filter_by(user_id=user.id, group_id=group.id).all()
     return render_template('update_availability.html', group=group, availabilities=user_avails)
     
