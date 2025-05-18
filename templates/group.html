@@ -6,9 +6,9 @@
 </head>
 <body>
     <h1>Group: {{ group.name }}</h1>
-    <p><strong>Group Code:</strong> {{ group.code }}</p>
+    <h2><strong>Group Code:</strong> {{ group.code }}</h2>
 
-    <h2>Common Availabilities</h2>
+    <h3>Common Availabilities</h3>
     {% if message %}
         <p>{{ message }}</p>
     {% elif common %}
