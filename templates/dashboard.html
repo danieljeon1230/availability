@@ -5,11 +5,17 @@
 
 <h3>Your Groups</h3>
 <ul>
-    {% for group in groups %}
-        <li><a href="{{ url_for('view_group', code=group.code) }}">{{ group.name }}</a></li>
-    {% else %}
-        <li>You are not part of any groups yet.</li>
-    {% endfor %}
+  {% for group in user_groups %}
+    <li>
+      <a href="{{ url_for('view_group', code=group.code) }}">{{ group.name }}</a>
+      <form action="{{ url_for('leave_group') }}" method="POST" style="display:inline;">
+        <input type="hidden" name="group_id" value="{{ group.id }}">
+        <button type="submit">Leave Group</button>
+      </form>
+    </li>
+  {% else %}
+    <p>You are not in any groups yet.</p>
+  {% endfor %}
 </ul>
 
 <a href="{{ url_for('join_group') }}"><button>Join a Group</button></a>
