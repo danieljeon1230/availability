@@ -91,6 +91,21 @@ def join_group():
         return render_template('join_group.html', success="You have joined the group!")
     return render_template('join_group.html')
 
+@app.route('/leave_group', methods=['POST'])
+def leave_group():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    group_id = request.form.get('group_id')
+    user_id = session['user_id']
+
+    membership = Membership.query.filter_by(user_id=user_id, group_id=group_id).first()
+    if membership:
+        db.session.delete(membership)
+        db.session.commit()
+
+    return redirect(url_for('dashboard'))
+
 @app.route('/group/<code>')
 def view_group(code):
     group = Group.query.filter_by(code=code).first_or_404()
