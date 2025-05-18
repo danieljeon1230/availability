@@ -90,19 +90,38 @@ def join_group():
     return render_template('join_group.html')
 
 @app.route('/group/<code>')
+@login_required
 def view_group(code):
     group = Group.query.filter_by(code=code).first_or_404()
-    user_ids = [m.user_id for m in group.memberships]
-    users = User.query.filter(User.id.in_(user_ids)).all()
-    avail_map = {u.id: Availability.query.filter_by(user_id=u.id, group_id=group.id).all() for u in users}
 
+    # Get all user IDs in the group
+    user_ids = [m.user_id for m in group.memberships]
+    if not user_ids:
+        return render_template('group.html', group=group, common=[], message="No members in this group yet.")
+
+    # Get all users and their availabilities in this group
+    users = User.query.filter(User.id.in_(user_ids)).all()
+    avail_map = {
+        u.id: Availability.query.filter_by(user_id=u.id, group_id=group.id).all()
+        for u in users
+    }
+
+    # Calculate common availability: exact overlaps across all users
     common = []
     first_user_avails = avail_map[users[0].id] if users else []
     for a in first_user_avails:
-        if all(any(b.start == a.start and b.end == a.end for b in avail_map[u.id]) for u in users[1:]):
+        if all(
+            any(b.start == a.start and b.end == a.end for b in avail_map[u.id])
+            for u in users[1:]
+        ):
             common.append(a)
 
-    return render_template('group.html', group=group, common=common)
+    return render_template(
+        'group.html',
+        group=group,
+        common=common,
+        message=None if common else "No common availabilities found."
+    )
 
 @app.route('/group/<code>/update', methods=['GET', 'POST'])
 def update_group(code):
