@@ -10,15 +10,15 @@
     <p style="color: red;">{{ error }}</p>
   {% endif %}
     
-  {% if success %}
-    <p style="color: green;">You have joined the group!</p>
-  {% endif %}
-
   <br>
   <button type="submit">Submit</button>
   <a href="{{ url_for('dashboard') }}"><button type="button">Cancel</button></a>
-  {% if success %}
-    <a href="{{ url_for('dashboard') }}"><button>Return to Dashboard</button></a>
-  {% endif %}
 </form>
+
+{% if success %}
+  <p style="color: green;">You have joined the group!</p>
+  <a href="{{ url_for('dashboard') }}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+{% endif %}
 {% endblock %}
