@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, session, url_for, f
 from models import db, User, Group, Membership, Availability
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from collections import defaultdict
+from intervaltree import Interval, IntervalTree
 import random
 import string
 
@@ -88,10 +90,6 @@ def join_group():
             db.session.commit()
         return render_template('join_group.html', success="You have joined the group!")
     return render_template('join_group.html')
-
-from collections import defaultdict
-from datetime import datetime
-from intervaltree import Interval, IntervalTree
 
 @app.route('/group/<code>')
 def view_group(code):
