@@ -90,7 +90,6 @@ def join_group():
     return render_template('join_group.html')
 
 @app.route('/group/<code>')
-@login_required
 def view_group(code):
     group = Group.query.filter_by(code=code).first_or_404()
 
