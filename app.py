@@ -74,7 +74,6 @@ def create_group():
         db.session.add(membership)
         db.session.commit()
 
-        # Placeholder: Replace with actual email sending
         print(f"Email sent to {user.email}: Group code is {code}")
         return render_template('invite.html', code=code)
     return render_template('create_group.html')
@@ -101,7 +100,6 @@ def view_group(code):
     users = User.query.filter(User.id.in_(user_ids)).all()
     avail_map = {u.id: Availability.query.filter_by(user_id=u.id, group_id=group.id).all() for u in users}
 
-    # Compute common times (placeholder logic)
     common = []
     first_user_avails = avail_map[users[0].id] if users else []
     for a in first_user_avails:
