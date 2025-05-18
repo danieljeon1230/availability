@@ -10,7 +10,7 @@
 {% elif common %}
     <ul>
     {% for start, end in common %}
-        <li>{{ avail.start.strftime('%Y-%m-%d %H:%M') }} to {{ avail.end.strftime('%Y-%m-%d %H:%M') }}</li>
+        <li>{{ start.strftime('%Y-%m-%d %H:%M') }} to {{ end.strftime('%Y-%m-%d %H:%M') }}</li>
     {% endfor %}
     </ul>
 {% else %}
