@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ email }}</h2>
+
+<h3>Your Groups</h3>
+<ul>
+    {% for group in groups %}
+        <li><a href="{{ url_for('view_group', code=group.code) }}">{{ group.name }}</a></li>
+    {% else %}
+        <li>You are not part of any groups yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('join_group') }}"><button>Join a Group</button></a>
+<a href="{{ url_for('create_group') }}"><button>Create New Group</button></a>
+{% endblock %}
