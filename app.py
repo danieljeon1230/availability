@@ -11,10 +11,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 def generate_group_code():
     while True:
         code = ''.join(random.choices(string.digits, k=5))
