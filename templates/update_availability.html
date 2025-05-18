@@ -2,6 +2,7 @@
 {% block title %}Update Availability for {{ group.name }}{% endblock %}
 {% block content %}
 <h2>Update Availability for {{ group.name }}</h2>
+
 <form method="post" id="availability-form">
     <div id="availability-fields">
         {% for avail in availabilities %}
@@ -14,10 +15,15 @@
             </div>
         {% endfor %}
     </div>
+
     <button type="button" onclick="addAvailability()">Add Availability</button>
     <br><br>
     <button type="submit">Save Changes</button>
     <a href="{{ url_for('view_group', code=group.code) }}"><button type="button">Cancel</button></a>
+
+    {% if error %}
+      <p style="color: red; margin-top: 10px;">{{ error }}</p>
+    {% endif %}
 </form>
 
 <script>
