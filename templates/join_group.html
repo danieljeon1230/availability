@@ -1,19 +1,26 @@
-{% extends 'base.html' %}
-{% block title %}Join Group{% endblock %}
-{% block content %}
-<h2>Join a Group</h2>
-{% if error %}
-    <p style="color: red;">{{ error }}</p>
-{% elif success %}
-    <p style="color: green;">{{ success }}</p>
-    <a href="{{ url_for('dashboard') }}"><button>Return to Dashboard</button></a>
-{% else %}
-    <form method="post">
-        <label>Enter 5-digit Code:</label>
-        <input type="text" name="code" pattern="\d{5}" required>
-        <br>
-        <button type="submit">Submit</button>
-        <a href="{{ url_for('dashboard') }}"><button type="button">Cancel</button></a>
-    </form>
-{% endif %}
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Join Group</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <h1>Join a Group</h1>
+  <form method="POST">
+    <label for="code">Enter Group Code:</label><br>
+    <input type="text" name="code" required><br>
+    
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    
+    {% if success %}
+      <p style="color: green;">{{ success }}</p>
+    {% endif %}
+
+    <br>
+    <button type="submit">Submit</button>
+    <a href="{{ url_for('dashboard') }}"><button type="button">Cancel</button></a>
+  </form>
+</body>
+</html>
