@@ -181,7 +181,6 @@ def update_group(code):
             error_message = "Each start day and time must be before the corresponding end day and time"
             return render_template('update_availability.html', group=group, availabilities=user_avails, error=error_message)
 
-        # Clear old and add new
         Availability.query.filter_by(user_id=user.id, group_id=group.id).delete()
         for a in availabilities:
             db.session.add(a)
