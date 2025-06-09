@@ -1,24 +1,50 @@
 {% extends 'base.html' %}
 {% block title %}Group{% endblock %}
 {% block content %}
-<h1>Group: {{ group.name }}</h1>
-<h2>Group Code: {{ group.code }}</h2>
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white shadow rounded-lg p-6 mb-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">{{ group.name }}</h1>
+            <p class="mt-2 text-lg text-gray-600">Group Code: <span class="font-mono bg-gray-100 px-2 py-1 rounded">{{ group.code }}</span></p>
+        </div>
 
-<h3>Common Availabilities</h3>
-{% if message %}
-    <p>{{ message }}</p>
-{% elif common %}
-    <ul>
-    {% for start, end in common %}
-        <li>{{ start.strftime('%Y-%m-%d %H:%M') }} to {{ end.strftime('%Y-%m-%d %H:%M') }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No availabilities yet.</p>
-{% endif %}
+        <div class="mt-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Availabilities</h3>
+            {% if message %}
+                <div class="rounded-md bg-yellow-50 p-4">
+                    <div class="flex">
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-yellow-800">{{ message }}</h3>
+                        </div>
+                    </div>
+                </div>
+            {% elif common %}
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <ul class="space-y-2">
+                        {% for start, end in common %}
+                            <li class="flex items-center justify-between p-3 bg-white rounded-md shadow-sm">
+                                <span class="text-gray-900">{{ start.strftime('%Y-%m-%d %H:%M') }}</span>
+                                <span class="text-gray-500">to</span>
+                                <span class="text-gray-900">{{ end.strftime('%Y-%m-%d %H:%M') }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="rounded-md bg-gray-50 p-4">
+                    <p class="text-gray-600">No availabilities yet.</p>
+                </div>
+            {% endif %}
+        </div>
 
-<a href="{{ url_for('update_group', code=group.code) }}"><button>Update Availability</button></a>
-
-<br><br>
-<a href="{{ url_for('dashboard') }}">Return to Dashboard</a>
+        <div class="mt-8 flex justify-center space-x-4">
+            <a href="{{ url_for('update_group', code=group.code) }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Update Availability
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Return to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

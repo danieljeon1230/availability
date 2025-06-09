@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}Invite Your Friends{% endblock %}
 {% block content %}
-<h2>Invite Your Friends!</h2>
-<p>Your group's access code is: <strong>{{ code }}</strong></p>
-<a href="{{ url_for('dashboard') }}"><button>Return to Dashboard</button></a>
+<div class="min-h-[80vh] flex items-center justify-center">
+    <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Invite Your Friends!</h2>
+            <div class="mt-6">
+                <p class="text-lg text-gray-600">Your group's access code is:</p>
+                <div class="mt-2">
+                    <span class="inline-flex items-center px-4 py-2 rounded-md text-2xl font-mono bg-gray-100 text-gray-900">
+                        {{ code }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="{{ url_for('dashboard') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Return to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

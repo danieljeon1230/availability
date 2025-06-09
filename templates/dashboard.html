@@ -1,23 +1,41 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
-<h2>Welcome to Availability Match!</h2>
+<div class="max-w-4xl mx-auto">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-900">Welcome to Availability Match!</h2>
+    </div>
 
-<h3>Your Groups</h3>
-<ul>
-  {% for group in user_groups %}
-    <li>
-      <a href="{{ url_for('view_group', code=group.code) }}">{{ group.name }}</a>
-      <form action="{{ url_for('leave_group') }}" method="POST" style="display:inline;">
-        <input type="hidden" name="group_id" value="{{ group.id }}">
-        <button type="submit">Leave Group</button>
-      </form>
-    </li>
-  {% else %}
-    <p>You are not in any groups yet.</p>
-  {% endfor %}
-</ul>
+    <div class="bg-white shadow rounded-lg p-6 mb-8">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Your Groups</h3>
+        {% if user_groups %}
+            <div class="space-y-4">
+                {% for group in user_groups %}
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <a href="{{ url_for('view_group', code=group.code) }}" class="text-lg font-medium text-indigo-600 hover:text-indigo-500">
+                            {{ group.name }}
+                        </a>
+                        <form action="{{ url_for('leave_group') }}" method="POST" class="inline">
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <button type="submit" class="ml-4 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline">
+                                Leave Group
+                            </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-600">You are not in any groups yet.</p>
+        {% endif %}
+    </div>
 
-<a href="{{ url_for('join_group') }}"><button>Join a Group</button></a>
-<a href="{{ url_for('create_group') }}"><button>Create New Group</button></a>
+    <div class="flex justify-center space-x-4">
+        <a href="{{ url_for('join_group') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Join a Group
+        </a>
+        <a href="{{ url_for('create_group') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Create New Group
+        </a>
+    </div>
+</div>
 {% endblock %}

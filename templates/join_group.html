@@ -1,24 +1,54 @@
 {% extends 'base.html' %}
 {% block title %}Join a Group{% endblock %}
 {% block content %}
-<h1>Join a Group</h1>
-<form method="POST">
-  <label for="code">Enter Group Code:</label><br>
-  <input type="text" name="code" required><br>
-    
-  {% if error %}
-    <p style="color: red;">{{ error }}</p>
-  {% endif %}
-    
-  <br>
-  <button type="submit">Submit</button>
-  <a href="{{ url_for('dashboard') }}"><button type="button">Cancel</button></a>
-</form>
+<div class="min-h-[80vh] flex items-center justify-center">
+    <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
+        <div>
+            <h1 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Join a Group</h1>
+        </div>
+        
+        {% if error %}
+            <div class="rounded-md bg-red-50 p-4">
+                <div class="flex">
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-red-800">{{ error }}</h3>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
-{% if success %}
-  <p style="color: green;">You have joined the group!</p>
-  <a href="{{ url_for('dashboard') }}">
-    <button type="button">Return to Dashboard</button>
-  </a>
-{% endif %}
+        {% if success %}
+            <div class="rounded-md bg-green-50 p-4">
+                <div class="flex">
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-green-800">{{ success }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="{{ url_for('dashboard') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Return to Dashboard
+                </a>
+            </div>
+        {% else %}
+            <form class="mt-8 space-y-6" method="POST">
+                <div class="rounded-md shadow-sm">
+                    <div>
+                        <label for="code" class="block text-sm font-medium text-gray-700">Enter Group Code</label>
+                        <input id="code" name="code" type="text" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                    </div>
+                </div>
+
+                <div class="flex space-x-4">
+                    <button type="submit" class="flex-1 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Join Group
+                    </button>
+                    <a href="{{ url_for('dashboard') }}" class="flex-1 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-center">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
