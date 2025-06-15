@@ -9,7 +9,7 @@
 
 ## Setup and Installation
 ```bash
-git clone https://github.com/your-username/group-availability-scheduler.git
+git clone https://github.com/danieljeon1230/availability.git
 cd availability
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
