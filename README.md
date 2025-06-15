@@ -34,7 +34,7 @@ A Flask-based web application that helps groups find common available time slots
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/danieljeon1230/availability.git
 cd availability
 ```
 
