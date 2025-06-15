@@ -80,5 +80,5 @@ The application uses the following models:
 ## Security Notes
 
 - The application uses session-based authentication
-- Passwords are stored in plain text (consider implementing password hashing for production)
+- Passwords are stored in plain text (consider implementing password hashing)
 - A secret key is required for session management
